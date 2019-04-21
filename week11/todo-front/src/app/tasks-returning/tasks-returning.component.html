@@ -1,0 +1,28 @@
+<app-main>
+  <ng-container>
+    <div class="container">
+      <div class="row">
+        <button type="button" class="btn btn-link btn-sm" (click)="navigateBack()">Back</button>
+      </div>
+
+      <table class="table">
+      <tr>
+        <td>#</td>
+        <td>Name</td>
+        <td>Status</td>
+      </tr>
+      <tr *ngFor="let task of tasks">
+        <td>{{task.id}}</td>
+        <td>{{task.name}}</td>
+        <td>
+          {{task.status}}
+        </td>
+        <td>
+          <a routerLink="/tasks/{{task.id}}/">About</a>
+        </td>
+      </tr>
+    </table>
+    </div>
+  </ng-container>
+</app-main>
+
