@@ -61,10 +61,12 @@ def get_task_list_tasks(request, pk):
         task_list = TaskList.objects.get(id = pk)
         serializer = TaskSerializer(data = request.data)
         print(request.data)
+
         if serializer.is_valid():
             print("de")
             serializer.save(task_list = task_list)
             return Response(serializer.data)
+        print(serializer.errors)
         return Response(serializer.errors)
 
 @api_view(['GET', 'PUT', 'DELETE'])

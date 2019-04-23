@@ -19,7 +19,7 @@ class TaskListSerializer(serializers.Serializer):
 class TaskSerializer(serializers.ModelSerializer):
     id = serializers.IntegerField(read_only = True)
     name = serializers.CharField()
-    created_at = serializers.DateTimeField()
+    created_at = serializers.DateTimeField(read_only = True)
     due_on = serializers.DateField()
     status = serializers.CharField()
     task_list = TaskListSerializer(read_only = True)
