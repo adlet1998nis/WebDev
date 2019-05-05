@@ -1,9 +1,17 @@
 from api.models import TaskList, Task
 from rest_framework import serializers
+from api.models import User
+
+
+class UserSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = User
+        fields = ('id', 'username', )
 
 class TaskListSerializer(serializers.Serializer):
     id = serializers.IntegerField(read_only = True)
     name = serializers.CharField()
+    created_by = UserSerializer(read_only = True)
 
     def create(self, validated_data):
         task_list = TaskList(**validated_data)
@@ -23,7 +31,8 @@ class TaskSerializer(serializers.ModelSerializer):
     due_on = serializers.DateField()
     status = serializers.CharField()
     task_list = TaskListSerializer(read_only = True)
+    created_by = UserSerializer(read_only = True)
 
     class Meta:
         model = Task
-        fields = ('id', 'name', 'created_at', 'due_on', 'status', 'task_list',)
+        fields = ('id', 'name', 'created_at', 'due_on', 'status', 'task_list', 'created_by')

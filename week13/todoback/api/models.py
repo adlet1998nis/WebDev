@@ -1,9 +1,10 @@
 from django.db import models
-
+from django.contrib.auth.models import User
 # Create your models here.
 
 class TaskList(models.Model):
     name = models.CharField(max_length = 300)
+    created_by = models.ForeignKey(User, on_delete = models.CASCADE, default = 1)
 
     def __str__(self):
         return '{}'.format(self.name)
@@ -21,6 +22,7 @@ class Task(models.Model):
     due_on = models.DateField()
     status = models.CharField(max_length = 300)
     task_list = models.ForeignKey(TaskList, on_delete = models.CASCADE)
+    created_by = models.ForeignKey(User, on_delete=models.CASCADE, default=1)
 
     def __str__(self):
         return '{}'.format(self.name)
